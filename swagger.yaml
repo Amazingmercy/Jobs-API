@@ -5,6 +5,7 @@ info:
   version: '1.0'
 servers:
 - url: https://jobsapi-jfeo.onrender.com/api/v1
+- url: http://localhost:9000/api/v1
   variables: {}
 paths:
   /auth/register:
@@ -24,9 +25,11 @@ paths:
               - example:
                   name: Victory
                   email: mercyamaefule01@gmail.com
+                  password: password
             example:
               name: Victory
               email: mercyamaefule01@gmail.com
+              password: password
         required: true
       responses:
         '200':
@@ -76,18 +79,19 @@ paths:
               allOf:
               - $ref: '#/components/schemas/createJobRequest'
               - example:
-                  company: Random
-                  position: Rand
+                  company: JAmaze Techs
+                  position: Backend developer
             example:
-              company: Random
-              position: Rand
+              company: JAmaze Techs
+              position: Backend developer
         required: true
       responses:
         '200':
           description: ''
           headers: {}
       deprecated: false
-      security: []
+      security: 
+      - bearer: []
     get:
       tags:
       - Jobs
@@ -171,15 +175,19 @@ components:
       required:
       - name
       - email
+      - password
       type: object
       properties:
         name:
           type: string
         email:
           type: string
+        password:
+          type: string
       example:
         name: Victory
         email: mercyamaefule01@gmail.com
+        password: password
     LoginuserRequest:
       title: LoginuserRequest
       required:
