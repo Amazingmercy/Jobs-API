@@ -1,0 +1,234 @@
+openapi: 3.0.0
+info:
+  title: Jobs API
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://localhost:9000/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterUserRequest'
+              - example:
+                  name: Victory
+                  email: mercyamaefule01@gmail.com
+            example:
+              name: Victory
+              email: mercyamaefule01@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login user
+      operationId: Loginuser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginuserRequest'
+              - example:
+                  email: mercyamaefule53@gmail.com
+                  password: mercy
+            example:
+              email: mercyamaefule53@gmail.com
+              password: mercy
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+      - Jobs
+      summary: create Job
+      operationId: createJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createJobRequest'
+              - example:
+                  company: Random
+                  position: Rand
+            example:
+              company: Random
+              position: Rand
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    get:
+      tags:
+      - Jobs
+      summary: Get my Jobs
+      operationId: GetmyJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The Job ID
+    get:
+      tags:
+      - Jobs
+      summary: Get a single Job
+      operationId: GetasingleJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+      
+    patch:
+      tags:
+      - Jobs
+      summary: Update Job
+      operationId: UpdateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateJobRequest'
+              - example:
+                  company: Google
+                  position: Fullstack developer
+            example:
+              company: Google
+              position: Fullstack developer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  
+    delete:
+      tags:
+      - Jobs
+      summary: Delete Job
+      operationId: DeleteJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - name
+      - email
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      example:
+        name: Victory
+        email: mercyamaefule01@gmail.com
+    LoginuserRequest:
+      title: LoginuserRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: mercyamaefule53@gmail.com
+        password: mercy
+    createJobRequest:
+      title: createJobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Random
+        position: Rand
+    UpdateJobRequest:
+      title: UpdateJobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Google
+        position: Fullstack developer
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+  description: ''
+- name: Jobs
+  description: ''
